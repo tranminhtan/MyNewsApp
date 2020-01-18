@@ -1,4 +1,4 @@
-package com.news.app.di.news
+package com.news.app.di.list
 
 import com.news.app.annotation.ActivityScoped
 import com.news.app.network.NewsService
