@@ -2,22 +2,30 @@ package com.news.app.ui.list
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.news.app.R
-import com.news.app.network.NewsService
 import dagger.android.support.DaggerAppCompatActivity
-import javax.inject.Inject
+import io.reactivex.Completable
+import io.reactivex.disposables.Disposable
 
 class NewsListActivity : DaggerAppCompatActivity() {
-    @Inject
-    lateinit var newsService: NewsService
+    private lateinit var viewModel: NewsListViewModel
+    private lateinit var disposable: Disposable
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        newsService.getTopHeadlines(BuildConfig.API_KEY, Locale.getDefault().country)
-//            .map { it.articles }
-//            .subscribe({}, { Timber.d(it) })
+        viewModel.articles.observe(this, Observer {
+            // Update adapter
+        })
+        disposable = Completable.mergeArray(viewModel.fetchArticles(), viewModel.observeArticles())
+            .subscribe()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable.dispose()
     }
 }

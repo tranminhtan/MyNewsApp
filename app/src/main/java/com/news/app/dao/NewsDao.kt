@@ -14,7 +14,7 @@ interface NewsDao {
     fun getArticles(): Observable<List<Article>>
 
     @Insert
-    fun insertAll(vararg articles: Article): Completable
+    fun insertAll(articles: List<Article>): Completable
 
     @Query("DELETE FROM article")
     fun deleteAll(): Completable
