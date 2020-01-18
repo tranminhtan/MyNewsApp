@@ -7,9 +7,8 @@ import dagger.Provides
 import dagger.multibindings.IntoSet
 
 @Module
-object JsonAdapterModule {
+class JsonAdapterModule {
 
-    @JvmStatic
     @Provides
     @IntoSet
     fun provideJsonAdapterFactory(): JsonAdapter.Factory = NewsJsonAdapterFactory()

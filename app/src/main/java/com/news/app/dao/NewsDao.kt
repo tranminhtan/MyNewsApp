@@ -1,0 +1,21 @@
+package com.news.app.dao
+
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import com.news.app.model.Article
+import io.reactivex.Completable
+import io.reactivex.Observable
+
+@Dao
+interface NewsDao {
+
+    @Query("SELECT * FROM article")
+    fun getArticles(): Observable<List<Article>>
+
+    @Insert
+    fun insertAll(vararg articles: Article): Completable
+
+    @Query("DELETE FROM article")
+    fun deleteAll(): Completable
+}
