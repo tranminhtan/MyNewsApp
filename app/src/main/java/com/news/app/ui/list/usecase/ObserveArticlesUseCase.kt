@@ -1,5 +1,6 @@
 package com.news.app.ui.list.usecase
 
+import com.news.app.model.Article
 import com.news.app.ui.list.ArticleItem
 import com.news.app.ui.list.NewsListRepository
 import io.reactivex.Observable
@@ -10,8 +11,14 @@ class ObserveArticlesUseCase @Inject constructor(private val repository: NewsLis
         return repository.observeArticles()
             .switchMapSingle {
                 Observable.fromIterable(it)
-                    .map { it -> ArticleItem() }
+                    .map { article -> toArticleItem(article) }
                     .toList()
             }
+    }
+
+    private fun toArticleItem(article: Article): ArticleItem {
+        return article.run {
+            ArticleItem(title, author ?: "", description, url, imageUrl, content ?: "")
+        }
     }
 }

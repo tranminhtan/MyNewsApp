@@ -1,14 +1,16 @@
 package com.news.app.di
 
+import android.app.Application
 import androidx.room.Room
 import com.news.app.BuildConfig
-import com.news.app.MyApplication
 import com.news.app.base.RetrofitProvider
 import com.news.app.base.SchedulersProvider
 import com.news.app.base.SchedulersProviderImpl
-import com.news.app.dao.NewsDao
-import com.news.app.dao.NewsDatabase
+import com.news.app.db.NewsDatabase
 import com.news.app.moshi.MoshiProvider
+import com.news.app.network.NewsService
+import com.news.app.ui.list.NewsListRepository
+import com.news.app.ui.list.NewsListRepositoryImpl
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -36,7 +38,19 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideDataBase(application: MyApplication): NewsDao {
-        return Room.databaseBuilder(application, NewsDatabase::class.java, BuildConfig.DB_NAME).build().newsDao()
+    fun provideDataBase(application: Application): NewsDatabase {
+        return Room.databaseBuilder(application, NewsDatabase::class.java, BuildConfig.DB_NAME).build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideRepository(newsDatabase: NewsDatabase, newsService: NewsService): NewsListRepository {
+        return NewsListRepositoryImpl(newsDatabase, newsService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideNewsService(retrofit: Retrofit): NewsService {
+        return retrofit.create(NewsService::class.java)
     }
 }

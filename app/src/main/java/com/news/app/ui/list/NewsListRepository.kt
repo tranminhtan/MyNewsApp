@@ -1,25 +1,26 @@
 package com.news.app.ui.list
 
 import com.news.app.BuildConfig
-import com.news.app.dao.NewsDao
+import com.news.app.db.NewsDatabase
 import com.news.app.model.Article
 import com.news.app.model.Status
 import com.news.app.network.NewsService
 import io.reactivex.Completable
 import io.reactivex.Observable
+import javax.inject.Inject
 
 interface NewsListRepository {
     fun observeArticles(): Observable<List<Article>>
     fun fetchArticles(countryCode: String): Completable
 }
 
-class NewsListRepositoryImpl(
-    private val newsDao: NewsDao,
+class NewsListRepositoryImpl @Inject constructor(
+    private val newsDao: NewsDatabase,
     private val newsService: NewsService
 ) : NewsListRepository {
 
     override fun observeArticles(): Observable<List<Article>> {
-        return newsDao.getArticles().filter { it.isNotEmpty() }
+        return newsDao.newsDao().getArticles().filter { it.isNotEmpty() }
     }
 
     override fun fetchArticles(countryCode: String): Completable {
@@ -31,7 +32,7 @@ class NewsListRepositoryImpl(
                     response.articles
                 }
             }
-            .flatMapCompletable { articles -> newsDao.deleteAll().andThen(newsDao.insertAll(articles)) }
+            .flatMapCompletable { articles -> newsDao.newsDao().deleteAll().andThen(newsDao.newsDao().insertAll(articles)) }
     }
 
 }

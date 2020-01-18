@@ -1,4 +1,4 @@
-package com.news.app.dao
+package com.news.app.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

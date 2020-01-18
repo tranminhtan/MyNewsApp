@@ -1,4 +1,4 @@
-package com.news.app.dao
+package com.news.app.db
 
 import androidx.room.Dao
 import androidx.room.Insert
