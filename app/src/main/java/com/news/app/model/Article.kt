@@ -11,5 +11,5 @@ data class Article(
     @Json(name = "url") val url: String,
     @Json(name = "urlToImage") val urlToImage: String,
     @Json(name = "publishedAt") val publishedAt: String,
-    @Json(name = "content") val content: String
+    @Json(name = "content") val content: String?
 )

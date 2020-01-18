@@ -1,12 +1,23 @@
 package com.news.app.moshi
 
+import com.news.app.model.Article
+import com.news.app.model.ArticleJsonAdapter
+import com.news.app.model.TopHeadlinesResponse
+import com.news.app.model.TopHeadlinesResponseJsonAdapter
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import java.lang.reflect.Type
 
 class NewsJsonAdapterFactory : JsonAdapter.Factory {
     override fun create(type: Type, annotations: MutableSet<out Annotation>, moshi: Moshi): JsonAdapter<*>? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (annotations.isNotEmpty()) return null
+        return when (Types.getRawType(type)) {
+            TopHeadlinesResponse::class.java -> TopHeadlinesResponseJsonAdapter(moshi).nullSafe()
+            Article::class.java -> ArticleJsonAdapter(moshi).nullSafe()
+
+            else -> null
+        }
     }
 
 }
