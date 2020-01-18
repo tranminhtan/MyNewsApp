@@ -14,7 +14,7 @@ buildscript {
         ktlintVersion = '0.33.0'
         ktxVersion = '1.1.0'
         materialVersion = '1.2.0-alpha03'
-        recyclerViewVersion = '1.1.0-alpha05'
+        recyclerViewVersion = '1.2.0-alpha01'
         roomVersion = '2.2.3'
         runnerVersion = '1.0.1'
         testExtJunit = '1.1.0'
@@ -28,6 +28,7 @@ buildscript {
         moshiVersion = "1.8.0"
         rxJavaVersion = "2.2.13"
         rxAndroidVersion = "2.1.1"
+        multidexVersion = "2.0.1"
     }
 
     repositories {

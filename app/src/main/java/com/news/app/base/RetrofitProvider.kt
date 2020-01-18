@@ -11,19 +11,19 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
-private const val HOST: String = "https://revolut.duckdns.org/"
 private const val TIMEOUT = 30L
 
 class RetrofitProvider(
+    private val host: String,
     private val moshi: Moshi,
     private val schedulers: Scheduler
 ) {
 
-    fun getRetrofit(): Retrofit {
+    fun createRetrofit(): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(schedulers))
-            .baseUrl(HOST)
+            .baseUrl(host)
             .client(getOkHttpClient())
             .build()
     }

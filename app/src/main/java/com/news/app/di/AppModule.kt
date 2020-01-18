@@ -1,5 +1,6 @@
 package com.news.app.di
 
+import com.news.app.BuildConfig
 import com.news.app.base.RetrofitProvider
 import com.news.app.base.SchedulersProvider
 import com.news.app.base.SchedulersProviderImpl
@@ -29,6 +30,6 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRetrofit(moshi: Moshi, schedulersProvider: SchedulersProvider): Retrofit {
-        return RetrofitProvider(moshi, schedulersProvider.io()).getRetrofit()
+        return RetrofitProvider(BuildConfig.NEWS_URL, moshi, schedulersProvider.io()).createRetrofit()
     }
 }
