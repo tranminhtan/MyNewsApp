@@ -20,7 +20,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/header_height"
         android:layout_marginBottom="8dp"
         android:background="?selectableItemBackground"
         android:onClick="@{() -> onArticleClickListener.onClickArticle(item)}"
@@ -29,7 +29,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="match_parent"
             android:contentDescription="@null"
             android:scaleType="fitXY"
             app:imageFromUrl="@{item.imageUrl}"
