@@ -8,6 +8,9 @@ import com.news.app.R
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Completable
 import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
+import io.reactivex.internal.functions.Functions
+import timber.log.Timber
 import javax.inject.Inject
 
 class NewsListActivity : DaggerAppCompatActivity() {
@@ -22,10 +25,10 @@ class NewsListActivity : DaggerAppCompatActivity() {
 
         val viewModel = ViewModelProvider(this, viewModelFactory).get(NewsListViewModel::class.java)
         viewModel.articles.observe(this, Observer {
-            // Update adapter
+            Timber.d(it.toString())
         })
         disposable = Completable.mergeArray(viewModel.fetchArticles(), viewModel.observeArticles())
-            .subscribe()
+            .subscribe(Functions.EMPTY_ACTION, Consumer { Timber.e(it) })
     }
 
     override fun onDestroy() {

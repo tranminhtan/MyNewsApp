@@ -20,7 +20,7 @@ class NewsListViewModel @Inject constructor(
 
     fun observeArticles(): Completable {
         return observeArticlesUseCase.observe()
-            .doOnNext { articles.value = it }
+            .doOnNext { articles.postValue(it) }
             .ignoreElements()
     }
 }

@@ -18,7 +18,14 @@ class ObserveArticlesUseCase @Inject constructor(private val repository: NewsLis
 
     private fun toArticleItem(article: Article): ArticleItem {
         return article.run {
-            ArticleItem(title, author ?: "", description, url, imageUrl, content ?: "")
+            ArticleItem(
+                title,
+                author ?: "",
+                description ?: "",
+                url ?: "",
+                imageUrl ?: "",
+                content ?: ""
+            )
         }
     }
 }
