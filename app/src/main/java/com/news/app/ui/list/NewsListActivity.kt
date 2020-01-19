@@ -41,7 +41,7 @@ class NewsListActivity : DaggerAppCompatActivity() {
             adapter.submitList(it)
         })
         listener.onClickArticle.observe(this, Observer {
-            navigateNewsDetail(it)
+            navigateToNewsDetail(it)
         })
 
         disposable = Completable.mergeArray(viewModel.observeArticles(), viewModel.fetchArticles())
@@ -53,7 +53,7 @@ class NewsListActivity : DaggerAppCompatActivity() {
         disposable.dispose()
     }
 
-    private fun navigateNewsDetail(item: ArticleItem) {
+    private fun navigateToNewsDetail(item: ArticleItem) {
         val intent = Intent(this, NewsDetailActivity::class.java)
         intent.putExtra(NewsDetailActivity.EXTRA_ARTICLE, item)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
