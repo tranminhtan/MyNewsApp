@@ -21,14 +21,14 @@ class NewsListActivity : DaggerAppCompatActivity() {
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_news_list)
 
         val viewModel = ViewModelProvider(this, viewModelFactory).get(NewsListViewModel::class.java)
         viewModel.articles.observe(this, Observer {
             Timber.d(it.toString())
         })
-        disposable = Completable.mergeArray(viewModel.fetchArticles(), viewModel.observeArticles())
-            .subscribe(Functions.EMPTY_ACTION, Consumer { Timber.e(it) })
+//        disposable = Completable.mergeArray(viewModel.fetchArticles(), viewModel.observeArticles())
+//            .subscribe(Functions.EMPTY_ACTION, Consumer { Timber.e(it) })
     }
 
     override fun onDestroy() {
