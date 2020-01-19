@@ -32,7 +32,10 @@ class NewsListRepositoryImpl @Inject constructor(
                     response.articles
                 }
             }
-            .flatMapCompletable { articles -> database.newsDao().deleteAll().andThen(database.newsDao().insertAll(articles)) }
+            .flatMapCompletable { articles ->
+                database.newsDao().deleteAll()
+                    .andThen(database.newsDao().insertAll(articles))
+            }
             .onErrorComplete()
     }
 

@@ -95,6 +95,7 @@ dependencies {
 
     // Other
     implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+    implementation "com.facebook.shimmer:shimmer:$rootProject.shimmerVersion"
 
     // Local unit tests
     testImplementation "junit:junit:$rootProject.junitVersion"
