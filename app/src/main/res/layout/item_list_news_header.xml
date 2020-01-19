@@ -20,7 +20,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:background="?selectableItemBackground"
         android:onClick="@{() -> onArticleClickListener.onClickArticle(item)}"
         android:orientation="vertical"
@@ -28,9 +29,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="140dp"
             android:contentDescription="@null"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             app:imageFromUrl="@{item.imageUrl}"
             app:placeholder="@{@drawable/ic_placeholder_big}"
             tools:background="@android:color/black"
