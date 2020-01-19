@@ -1,23 +1,24 @@
 package com.news.app.di.list
 
-import com.news.app.annotation.ActivityScoped
-import com.news.app.network.NewsService
-import com.news.app.ui.list.NewsListAdapter
+import androidx.lifecycle.ViewModel
+import com.news.app.annotation.ViewModelKey
+import com.news.app.ui.list.NewsListViewModel
 import com.news.app.ui.list.OnArticleClickListener
+import com.news.app.ui.list.OnArticleClickListenerImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
-import retrofit2.Retrofit
-import javax.inject.Singleton
+import dagger.multibindings.IntoMap
 
 @Module
-class NewsListActivityModule {
-    @Singleton
-    @Provides
-    fun provideNewsService(retrofit: Retrofit): NewsService {
-        return retrofit.create(NewsService::class.java)
-    }
+abstract class NewsListActivityModule {
 
-    @ActivityScoped
-    @Provides
-    fun provideNewsAdapter(articleClickListener: OnArticleClickListener) = NewsListAdapter(articleClickListener)
+    @Binds
+    abstract fun bindListener(listener: OnArticleClickListenerImpl): OnArticleClickListener
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NewsListViewModel::class)
+    abstract fun bindNewsListViewModel(
+        viewModel: NewsListViewModel
+    ): ViewModel
 }

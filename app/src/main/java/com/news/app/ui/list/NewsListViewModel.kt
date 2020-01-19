@@ -11,13 +11,10 @@ import javax.inject.Inject
 class NewsListViewModel @Inject constructor(
     private val fetchArticlesUseCase: FetchArticlesUseCase,
     private val observeArticlesUseCase: ObserveArticlesUseCase
-) : ViewModel(), OnArticleClickListener {
+) : ViewModel() {
 
     private val _articles = MutableLiveData<List<ArticleItem>>()
     val articles: LiveData<List<ArticleItem>> = _articles
-
-    private val _navigateToDetailAction = MutableLiveData<ArticleItem>()
-    val navigateToDetailAction: LiveData<ArticleItem> = _navigateToDetailAction
 
     fun fetchArticles(): Completable {
         return fetchArticlesUseCase.fetchArticles()
@@ -27,9 +24,5 @@ class NewsListViewModel @Inject constructor(
         return observeArticlesUseCase.observe()
             .doOnNext { _articles.postValue(it) }
             .ignoreElements()
-    }
-
-    override fun onClickArticle(articleItem: ArticleItem) {
-        _navigateToDetailAction.value = articleItem
     }
 }

@@ -22,13 +22,15 @@ class NewsListActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
-    lateinit var adapter: NewsListAdapter
+    lateinit var listener: OnArticleClickListener
 
+    private lateinit var adapter: NewsListAdapter
     private lateinit var disposable: Disposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_list)
+        adapter = NewsListAdapter(listener)
         articlesRecyclerView.adapter = adapter
         shimmerView.startShimmer()
 
@@ -38,7 +40,7 @@ class NewsListActivity : DaggerAppCompatActivity() {
             shimmerView.visibility = View.GONE
             adapter.submitList(it)
         })
-        viewModel.navigateToDetailAction.observe(this, Observer {
+        listener.onClickArticle.observe(this, Observer {
             navigateNewsDetail(it)
         })
 
