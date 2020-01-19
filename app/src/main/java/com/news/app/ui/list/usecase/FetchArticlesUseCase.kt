@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class FetchArticlesUseCase @Inject constructor(
     private val repository: NewsListRepository,
-    private val supportedCountryCode: SupportedCountryCode
+    private val supportedCountry: SupportedCountry
 ) {
-    fun fetchArticles(): Completable = repository.fetchArticles(supportedCountryCode.getCountryCode())
+    fun fetchArticles(): Completable = repository.fetchArticles(supportedCountry.getCountryCode())
 }

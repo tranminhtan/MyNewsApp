@@ -1,12 +1,14 @@
 package com.news.app.ui.list.usecase
 
+import androidx.annotation.VisibleForTesting
 import java.util.Locale
 import javax.inject.Inject
 
-private const val DEFAULT_CODE = "us"
+private const val DEFAULT_COUNTRY = "us"
 
-class SupportedCountryCode @Inject constructor() {
-    private val supportedCountry = arrayOf(
+class SupportedCountry @Inject constructor() {
+    @VisibleForTesting
+    val supportedCountry = arrayOf(
         "ae",
         "ar",
         "at",
@@ -68,7 +70,7 @@ class SupportedCountryCode @Inject constructor() {
             if (supportedCountry.contains(it)) {
                 it
             } else {
-                DEFAULT_CODE
+                DEFAULT_COUNTRY
             }
         }
     }
