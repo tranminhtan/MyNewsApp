@@ -6,6 +6,7 @@ import com.news.app.annotation.ViewModelKey
 import com.news.app.di.list.NewsListActivityModule
 import com.news.app.ui.list.NewsListActivity
 import com.news.app.ui.list.NewsListViewModel
+import com.news.app.ui.list.OnArticleClickListener
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -24,4 +25,7 @@ interface ActivityBindingModule {
     fun bindNewsListViewModel(
         viewModel: NewsListViewModel
     ): ViewModel
+
+    @Binds
+    fun bindOnArticleClickListener(newsListViewModel: NewsListViewModel): OnArticleClickListener
 }
