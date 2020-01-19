@@ -1,10 +1,13 @@
 package com.news.app.ui.list
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.news.app.R
+import com.news.app.ui.detail.NewsDetailActivity
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Completable
 import io.reactivex.disposables.Disposable
@@ -36,7 +39,7 @@ class NewsListActivity : DaggerAppCompatActivity() {
             adapter.submitList(it)
         })
         viewModel.navigateToDetailAction.observe(this, Observer {
-            // Open Detail
+            navigateNewsDetail(it)
         })
 
         disposable = Completable.mergeArray(viewModel.observeArticles(), viewModel.fetchArticles())
@@ -46,5 +49,15 @@ class NewsListActivity : DaggerAppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         disposable.dispose()
+    }
+
+    private fun navigateNewsDetail(item: ArticleItem) {
+        val intent = Intent(this, NewsDetailActivity::class.java)
+        intent.putExtra(NewsDetailActivity.EXTRA_ARTICLE, item)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(intent)
+        } else {
+            startActivity(intent)
+        }
     }
 }

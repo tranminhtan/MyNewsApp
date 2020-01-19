@@ -3,7 +3,6 @@ package com.news.app.ui.list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.news.app.base.Event
 import com.news.app.ui.list.usecase.FetchArticlesUseCase
 import com.news.app.ui.list.usecase.ObserveArticlesUseCase
 import io.reactivex.Completable
@@ -14,11 +13,11 @@ class NewsListViewModel @Inject constructor(
     private val observeArticlesUseCase: ObserveArticlesUseCase
 ) : ViewModel(), OnArticleClickListener {
 
-    val articles = MutableLiveData<List<ArticleItem>>()
+    private val _articles = MutableLiveData<List<ArticleItem>>()
+    val articles: LiveData<List<ArticleItem>> = _articles
 
-    private val _navigateToDetailAction = MutableLiveData<Event<ArticleItem>>()
-    val navigateToDetailAction: LiveData<Event<ArticleItem>>
-        get() = _navigateToDetailAction
+    private val _navigateToDetailAction = MutableLiveData<ArticleItem>()
+    val navigateToDetailAction: LiveData<ArticleItem> = _navigateToDetailAction
 
     fun fetchArticles(): Completable {
         return fetchArticlesUseCase.fetchArticles()
@@ -26,11 +25,11 @@ class NewsListViewModel @Inject constructor(
 
     fun observeArticles(): Completable {
         return observeArticlesUseCase.observe()
-            .doOnNext { articles.postValue(it) }
+            .doOnNext { _articles.postValue(it) }
             .ignoreElements()
     }
 
     override fun onClickArticle(articleItem: ArticleItem) {
-        _navigateToDetailAction.value = Event(articleItem)
+        _navigateToDetailAction.value = articleItem
     }
 }

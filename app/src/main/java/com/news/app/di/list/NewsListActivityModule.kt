@@ -7,10 +7,11 @@ import com.news.app.ui.list.OnArticleClickListener
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
 @Module
 class NewsListActivityModule {
-    @ActivityScoped
+    @Singleton
     @Provides
     fun provideNewsService(retrofit: Retrofit): NewsService {
         return retrofit.create(NewsService::class.java)
