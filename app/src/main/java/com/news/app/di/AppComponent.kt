@@ -3,6 +3,7 @@ package com.news.app.di
 import android.app.Application
 import com.news.app.MyApplication
 import com.news.app.di.list.JsonAdapterModule
+import com.news.app.di.vm.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
