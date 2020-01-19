@@ -15,12 +15,12 @@ interface NewsListRepository {
 }
 
 class NewsListRepositoryImpl @Inject constructor(
-    private val newsDao: NewsDatabase,
+    private val database: NewsDatabase,
     private val newsService: NewsService
 ) : NewsListRepository {
 
     override fun observeArticles(): Observable<List<Article>> {
-        return newsDao.newsDao().getArticles().filter { it.isNotEmpty() }
+        return database.newsDao().getArticles().filter { it.isNotEmpty() }
     }
 
     override fun fetchArticles(countryCode: String): Completable {
@@ -32,7 +32,8 @@ class NewsListRepositoryImpl @Inject constructor(
                     response.articles
                 }
             }
-            .flatMapCompletable { articles -> newsDao.newsDao().deleteAll().andThen(newsDao.newsDao().insertAll(articles)) }
+            .flatMapCompletable { articles -> database.newsDao().deleteAll().andThen(database.newsDao().insertAll(articles)) }
+            .onErrorComplete()
     }
 
 }

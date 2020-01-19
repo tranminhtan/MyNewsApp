@@ -36,7 +36,7 @@ class NewsListActivity : DaggerAppCompatActivity() {
             // Open Detail
         })
 
-        disposable = Completable.mergeArray(viewModel.fetchArticles(), viewModel.observeArticles())
+        disposable = Completable.mergeArray(viewModel.observeArticles(), viewModel.fetchArticles())
             .subscribe(Functions.EMPTY_ACTION, Consumer { Timber.e(it) })
     }
 
