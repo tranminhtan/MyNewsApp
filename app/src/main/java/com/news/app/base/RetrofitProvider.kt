@@ -19,7 +19,7 @@ class RetrofitProvider(
     private val schedulers: Scheduler
 ) {
 
-    fun createRetrofit(): Retrofit {
+    fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(schedulers))

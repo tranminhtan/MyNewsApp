@@ -31,7 +31,7 @@ class AppModule {
     @Singleton
     @Provides
     fun provideRetrofit(moshi: Moshi, schedulersProvider: SchedulersProvider): Retrofit {
-        return RetrofitProvider(BuildConfig.NEWS_URL, moshi, schedulersProvider.io()).createRetrofit()
+        return RetrofitProvider(BuildConfig.NEWS_URL, moshi, schedulersProvider.io()).getRetrofit()
     }
 
     @Singleton

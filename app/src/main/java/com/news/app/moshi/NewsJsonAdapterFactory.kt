@@ -9,6 +9,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import java.lang.reflect.Type
 
+// Manually implement the Factory rather than using KotlinJsonAdapterFactory for better performance
 class NewsJsonAdapterFactory : JsonAdapter.Factory {
     override fun create(type: Type, annotations: MutableSet<out Annotation>, moshi: Moshi): JsonAdapter<*>? {
         if (annotations.isNotEmpty()) return null
