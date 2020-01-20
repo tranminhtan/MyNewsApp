@@ -100,4 +100,5 @@ dependencies {
     // Local unit tests
     testImplementation "junit:junit:$rootProject.junitVersion"
     testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+    testImplementation "androidx.arch.core:core-testing:$rootProject.archTestingVersion"
 }

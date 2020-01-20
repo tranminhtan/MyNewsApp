@@ -25,13 +25,8 @@ class NewsListRepositoryImpl @Inject constructor(
 
     override fun fetchArticles(countryCode: String): Completable {
         return newsService.getTopHeadlines(BuildConfig.API_KEY, countryCode)
-            .map { response ->
-                if (response.status == Status.Error || response.articles.isNullOrEmpty()) {
-                    throw IllegalStateException("There is no data")
-                } else {
-                    response.articles
-                }
-            }
+            .filter { response -> response.status == Status.Ok && !response.articles.isNullOrEmpty() }
+            .map { it.articles }
             .flatMapCompletable { articles ->
                 database.newsDao().deleteAll()
                     .andThen(database.newsDao().insertAll(articles))

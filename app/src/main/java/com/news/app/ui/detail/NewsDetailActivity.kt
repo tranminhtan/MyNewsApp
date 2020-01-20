@@ -17,10 +17,11 @@ class NewsDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ViewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_news_detail)
-        val article: ArticleItem = (intent.extras!!.getParcelable(EXTRA_ARTICLE)!!)
-        val visibility = if (article.description.isNotEmpty()) View.VISIBLE else View.GONE
-        binding.setVariable(BR.item, article)
-        binding.setVariable(BR.spaceVisibility, visibility)
-
+        val article: ArticleItem? = intent.extras!!.getParcelable(EXTRA_ARTICLE)
+        article?.let {
+            val visibility = if (article.description.isNotEmpty()) View.VISIBLE else View.GONE
+            binding.setVariable(BR.item, article)
+            binding.setVariable(BR.spaceVisibility, visibility)
+        }
     }
 }

@@ -8,8 +8,15 @@ import com.news.app.db.NewsDatabase
 import org.mockito.Mockito
 
 class FakeDataBase : NewsDatabase() {
+    private var newsDao: NewsDao? = null
+
     override fun newsDao(): NewsDao {
-        return Mockito.mock(NewsDao::class.java)
+        return if (newsDao == null) {
+            newsDao = Mockito.mock(NewsDao::class.java)
+            newsDao!!
+        } else {
+            newsDao!!
+        }
     }
 
     override fun createOpenHelper(config: DatabaseConfiguration?): SupportSQLiteOpenHelper {

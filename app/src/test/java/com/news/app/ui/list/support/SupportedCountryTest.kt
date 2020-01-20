@@ -1,6 +1,5 @@
-package com.news.app.ui.list.usecase
+package com.news.app.ui.list.support
 
-import com.news.app.ui.list.support.SupportedCountry
 import org.junit.Assert
 import org.junit.Test
 import java.util.Locale
