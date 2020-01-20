@@ -1,7 +1,6 @@
 package com.news.app.ui.list
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -25,14 +24,14 @@ class NewsListActivity : DaggerAppCompatActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
     lateinit var listener: OnArticleClickListener
+    @Inject
+    lateinit var adapter: NewsListAdapter
 
-    private lateinit var adapter: NewsListAdapter
     private lateinit var disposable: Disposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_list)
-        adapter = NewsListAdapter(listener)
         articlesRecyclerView.adapter = adapter
         shimmerView.startShimmer()
 
@@ -58,10 +57,6 @@ class NewsListActivity : DaggerAppCompatActivity() {
     private fun navigateToNewsDetail(item: ArticleItem) {
         val intent = Intent(this, NewsDetailActivity::class.java)
         intent.putExtra(NewsDetailActivity.EXTRA_ARTICLE, item)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            startActivity(intent)
-        } else {
-            startActivity(intent)
-        }
+        startActivity(intent)
     }
 }

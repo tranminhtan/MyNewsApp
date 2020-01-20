@@ -19,6 +19,7 @@
         >
         <activity
             android:name=".ui.list.NewsListActivity"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             >
             <intent-filter>

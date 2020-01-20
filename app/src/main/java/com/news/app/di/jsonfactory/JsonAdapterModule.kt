@@ -1,4 +1,4 @@
-package com.news.app.di.list
+package com.news.app.di.jsonfactory
 
 import com.news.app.moshi.NewsJsonAdapterFactory
 import com.squareup.moshi.JsonAdapter

@@ -1,6 +1,7 @@
 package com.news.app.di.list
 
 import androidx.lifecycle.ViewModel
+import com.news.app.annotation.ActivityScoped
 import com.news.app.annotation.ViewModelKey
 import com.news.app.ui.list.NewsListViewModel
 import com.news.app.ui.list.support.OnArticleClickListener
@@ -10,9 +11,10 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class NewsListActivityModule {
+abstract class NewsListActivityBindsModule {
 
     @Binds
+    @ActivityScoped
     abstract fun bindListener(listener: OnArticleClickListenerImpl): OnArticleClickListener
 
     @Binds

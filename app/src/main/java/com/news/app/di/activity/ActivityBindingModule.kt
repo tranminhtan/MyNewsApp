@@ -1,7 +1,8 @@
-package com.news.app.di
+package com.news.app.di.activity
 
 import com.news.app.annotation.ActivityScoped
-import com.news.app.di.list.NewsListActivityModule
+import com.news.app.di.list.NewsListActivityBindsModule
+import com.news.app.di.list.NewsListActivityProvidesModule
 import com.news.app.ui.list.NewsListActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -12,7 +13,9 @@ interface ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(
         modules = [
-            NewsListActivityModule::class
+            // Kotlin class can't have both static and abstract (@Provides and @Binds)
+            NewsListActivityBindsModule::class,
+            NewsListActivityProvidesModule::class
         ]
     )
     fun contributeRatesActivityInjector(): NewsListActivity
