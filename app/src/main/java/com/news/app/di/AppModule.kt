@@ -9,8 +9,6 @@ import com.news.app.base.SchedulersProviderImpl
 import com.news.app.db.NewsDatabase
 import com.news.app.moshi.MoshiProvider
 import com.news.app.network.NewsService
-import com.news.app.ui.list.NewsListRepository
-import com.news.app.ui.list.NewsListRepositoryImpl
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -40,12 +38,6 @@ class AppModule {
     @Provides
     fun provideDataBase(application: Application): NewsDatabase {
         return Room.databaseBuilder(application, NewsDatabase::class.java, BuildConfig.DB_NAME).fallbackToDestructiveMigration().build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideRepository(newsDatabase: NewsDatabase, newsService: NewsService): NewsListRepository {
-        return NewsListRepositoryImpl(newsDatabase, newsService)
     }
 
     @Singleton
