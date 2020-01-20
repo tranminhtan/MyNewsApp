@@ -8,6 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.news.app.R
 import com.news.app.ui.detail.NewsDetailActivity
+import com.news.app.ui.list.support.ArticleItem
+import com.news.app.ui.list.support.OnArticleClickListener
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Completable
 import io.reactivex.disposables.Disposable

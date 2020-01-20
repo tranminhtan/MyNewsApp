@@ -3,6 +3,7 @@ package com.news.app.ui.list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.news.app.ui.list.support.ArticleItem
 import com.news.app.ui.list.usecase.FetchArticlesUseCase
 import com.news.app.ui.list.usecase.ObserveArticlesUseCase
 import io.reactivex.Completable

@@ -1,4 +1,4 @@
-package com.news.app.ui.list
+package com.news.app.ui.list.support
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

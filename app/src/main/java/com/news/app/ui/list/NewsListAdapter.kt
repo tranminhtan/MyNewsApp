@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.news.app.BR
 import com.news.app.R
+import com.news.app.ui.list.support.ArticleItem
+import com.news.app.ui.list.support.OnArticleClickListener
 
 class NewsListAdapter(
     private val onArticleClickListener: OnArticleClickListener

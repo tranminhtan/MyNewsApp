@@ -1,7 +1,7 @@
 package com.news.app.ui.list.usecase
 
 import com.news.app.model.Article
-import com.news.app.ui.list.ArticleItem
+import com.news.app.ui.list.support.ArticleItem
 import com.news.app.ui.list.NewsListRepository
 import io.reactivex.Observable
 import javax.inject.Inject

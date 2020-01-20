@@ -8,6 +8,7 @@ import com.bumptech.glide.request.RequestOptions
 
 @BindingAdapter(value = ["imageFromUrl", "placeholder"])
 fun bindImageFromUrl(imageView: ImageView, imageUrl: String?, placeholder: Drawable) {
+    // To avoid using wrong drawable in RecyclerView
     if (imageUrl.isNullOrEmpty()) {
         Glide.with(imageView.context)
             .load(placeholder)

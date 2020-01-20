@@ -1,5 +1,6 @@
 package com.news.app.ui.list.usecase
 
+import com.news.app.ui.list.support.SupportedCountry
 import com.news.app.utils.FakeNewsRepository
 import org.junit.Test
 

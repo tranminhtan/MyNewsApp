@@ -9,12 +9,12 @@
 
         <variable
             name="onArticleClickListener"
-            type="com.news.app.ui.list.OnArticleClickListener"
+            type="com.news.app.ui.list.support.OnArticleClickListener"
             />
 
         <variable
             name="item"
-            type="com.news.app.ui.list.ArticleItem"
+            type="com.news.app.ui.list.support.ArticleItem"
             />
     </data>
 

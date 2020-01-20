@@ -1,4 +1,4 @@
-package com.news.app.ui.list.usecase
+package com.news.app.ui.list.support
 
 import androidx.annotation.VisibleForTesting
 import java.util.Locale

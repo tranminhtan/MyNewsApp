@@ -14,7 +14,7 @@
 
         <variable
             name="item"
-            type="com.news.app.ui.list.ArticleItem"
+            type="com.news.app.ui.list.support.ArticleItem"
             />
     </data>
 

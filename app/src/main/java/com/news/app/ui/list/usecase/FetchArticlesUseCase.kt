@@ -1,6 +1,7 @@
 package com.news.app.ui.list.usecase
 
 import com.news.app.ui.list.NewsListRepository
+import com.news.app.ui.list.support.SupportedCountry
 import io.reactivex.Completable
 import javax.inject.Inject
 

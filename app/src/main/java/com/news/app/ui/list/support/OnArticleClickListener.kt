@@ -1,4 +1,4 @@
-package com.news.app.ui.list
+package com.news.app.ui.list.support
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

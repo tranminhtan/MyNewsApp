@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.news.app.BR
 import com.news.app.R
-import com.news.app.ui.list.ArticleItem
+import com.news.app.ui.list.support.ArticleItem
 
 class NewsDetailActivity : AppCompatActivity() {
     companion object {
