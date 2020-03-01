@@ -11,7 +11,7 @@ Tech stack
 - Kotlin
 - RxJava
 - Retrofit & Moshi
-- Room, LiveData, ViewModel
+- Room, LiveData, ViewModel, Lifecycle
 - MVVM & Data binding
 - Glide
 - Dagger
