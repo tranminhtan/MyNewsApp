@@ -10,13 +10,8 @@ import com.news.app.ui.detail.NewsDetailActivity
 import com.news.app.ui.list.support.ArticleItem
 import com.news.app.ui.list.support.OnArticleClickListener
 import dagger.android.support.DaggerAppCompatActivity
-import io.reactivex.Completable
-import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
-import io.reactivex.internal.functions.Functions
 import kotlinx.android.synthetic.main.activity_news_list.articlesRecyclerView
 import kotlinx.android.synthetic.main.shimmer_main_layout.shimmerView
-import timber.log.Timber
 import javax.inject.Inject
 
 class NewsListActivity : DaggerAppCompatActivity() {
@@ -27,8 +22,6 @@ class NewsListActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var adapter: NewsListAdapter
 
-    private lateinit var disposable: Disposable
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_list)
@@ -36,6 +29,8 @@ class NewsListActivity : DaggerAppCompatActivity() {
         shimmerView.startShimmer()
 
         val viewModel = ViewModelProvider(this, viewModelFactory).get(NewsListViewModel::class.java)
+        lifecycle.addObserver(viewModel)
+
         viewModel.articles.observe(this, Observer {
             shimmerView.stopShimmer()
             shimmerView.visibility = View.GONE
@@ -44,14 +39,10 @@ class NewsListActivity : DaggerAppCompatActivity() {
         listener.onClickArticle.observe(this, Observer {
             navigateToNewsDetail(it)
         })
-
-        disposable = Completable.mergeArray(viewModel.observeArticles(), viewModel.fetchArticles())
-            .subscribe(Functions.EMPTY_ACTION, Consumer { Timber.e(it) })
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        disposable.dispose()
         shimmerView.stopShimmer()
     }
 
