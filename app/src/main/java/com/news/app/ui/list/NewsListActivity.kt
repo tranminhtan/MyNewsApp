@@ -52,6 +52,7 @@ class NewsListActivity : DaggerAppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         disposable.dispose()
+        shimmerView.stopShimmer()
     }
 
     private fun navigateToNewsDetail(item: ArticleItem) {
