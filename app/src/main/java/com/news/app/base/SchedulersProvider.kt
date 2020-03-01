@@ -3,6 +3,7 @@ package com.news.app.base
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 interface SchedulersProvider {
     fun io(): Scheduler
@@ -10,7 +11,7 @@ interface SchedulersProvider {
     fun computation(): Scheduler
 }
 
-class SchedulersProviderImpl : SchedulersProvider {
+class SchedulersProviderImpl @Inject constructor() : SchedulersProvider {
     override fun io(): Scheduler = Schedulers.io()
 
     override fun ui(): Scheduler = AndroidSchedulers.mainThread()
