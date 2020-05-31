@@ -10,15 +10,17 @@ import com.news.app.ui.detail.NewsDetailActivity
 import com.news.app.ui.list.support.ArticleItem
 import com.news.app.ui.list.support.OnArticleClickListener
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_news_list.articlesRecyclerView
-import kotlinx.android.synthetic.main.shimmer_main_layout.shimmerView
+import kotlinx.android.synthetic.main.activity_news_list.*
+import kotlinx.android.synthetic.main.shimmer_main_layout.*
 import javax.inject.Inject
 
 class NewsListActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
     @Inject
     lateinit var listener: OnArticleClickListener
+
     @Inject
     lateinit var adapter: NewsListAdapter
 
@@ -39,11 +41,6 @@ class NewsListActivity : DaggerAppCompatActivity() {
         listener.onClickArticle.observe(this, Observer {
             navigateToNewsDetail(it)
         })
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        shimmerView.stopShimmer()
     }
 
     private fun navigateToNewsDetail(item: ArticleItem) {

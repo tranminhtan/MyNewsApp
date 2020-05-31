@@ -5,13 +5,13 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.news.app.model.Article
 import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.Single
 
 @Dao
 interface NewsDao {
 
     @Query("SELECT * FROM article")
-    fun getArticles(): Observable<List<Article>>
+    fun getArticles(): Single<List<Article>>
 
     @Insert
     fun insertAll(articles: List<Article>): Completable

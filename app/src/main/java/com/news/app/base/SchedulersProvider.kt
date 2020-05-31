@@ -18,3 +18,11 @@ class SchedulersProviderImpl @Inject constructor() : SchedulersProvider {
 
     override fun computation(): Scheduler = Schedulers.computation()
 }
+
+class MockSchedulerProvider : SchedulersProvider {
+    override fun io(): Scheduler = Schedulers.trampoline()
+
+    override fun ui(): Scheduler = Schedulers.trampoline()
+
+    override fun computation(): Scheduler = Schedulers.trampoline()
+}

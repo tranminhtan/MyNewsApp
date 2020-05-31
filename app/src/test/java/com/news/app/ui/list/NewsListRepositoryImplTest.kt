@@ -2,115 +2,113 @@ package com.news.app.ui.list
 
 import com.news.app.BuildConfig
 import com.news.app.TestBase
-import com.news.app.model.Article
+import com.news.app.base.MockSchedulerProvider
 import com.news.app.model.Status
 import com.news.app.model.TopHeadlinesResponse
 import com.news.app.network.NewsService
 import com.news.app.utils.FakeDataBase
+import com.news.app.utils.FakeDataProvider
 import io.reactivex.Completable
-import io.reactivex.Observable
 import io.reactivex.Single
 import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mock
-import org.mockito.Mockito
+import org.mockito.Mockito.never
+import org.mockito.Mockito.verify
 
 class NewsListRepositoryImplTest : TestBase() {
     @Mock
     lateinit var service: NewsService
-
     private val dataBase = FakeDataBase()
+    private val schedulersProvider = MockSchedulerProvider()
+
     private val countryCode = "sg"
-    private val articles = arrayListOf(
-        Article(1, "", "", null, "", "", "", ""),
-        Article(2, "", "", null, "", "", "", "")
-    )
+    private val articles = FakeDataProvider.mockArticles()
 
     private lateinit var repository: NewsListRepositoryImpl
 
     override fun setup() {
         super.setup()
-        repository = NewsListRepositoryImpl(dataBase, service)
-    }
+        repository = NewsListRepositoryImpl(dataBase, service, schedulersProvider)
 
-
-    /**
-     * The observeArticles() should not be terminated, we can achieve that with a RxJava Subject but keep it simple for now
-     */
-    @Test
-    fun observeArticles_empty_emmitNothing() {
-        given(dataBase.newsDao().getArticles()).willReturn(Observable.just(emptyList()))
-
-        repository.observeArticles().test()
-            .assertNoErrors()
-            .assertNoValues()
-            .assertTerminated()
-            .dispose()
+        given(dataBase.newsDao().insertAll(articles))
+            .willReturn(Completable.complete())
+        given(dataBase.newsDao().deleteAll())
+            .willReturn(Completable.complete())
     }
 
     @Test
-    fun observeArticles_hasArticles_emmitIt() {
-        given(dataBase.newsDao().getArticles()).willReturn(Observable.just(articles))
-
-        repository.observeArticles().test()
-            .assertNoErrors()
-            .assertValueCount(1)
-            .assertValue(articles)
-            .assertTerminated()
-            .dispose()
-    }
-
-    @Test
-    fun fetchArticles_emptyData_emmitNothing() {
-        given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
-            .willReturn(Single.just(TopHeadlinesResponse(Status.Ok, emptyList())))
-
-        repository.fetchArticles(countryCode).test()
-            .assertNoValues()
-            .assertNoErrors()
-            .assertTerminated()
-            .dispose()
-        Mockito.verifyNoMoreInteractions(dataBase.newsDao())
-    }
-
-    @Test
-    fun fetchArticles_statusError_emmitNothing() {
-        given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
-            .willReturn(Single.just(TopHeadlinesResponse(Status.Error, emptyList())))
-
-        repository.fetchArticles(countryCode).test()
-            .assertNoValues()
-            .assertNoErrors()
-            .assertTerminated()
-            .dispose()
-        Mockito.verifyNoMoreInteractions(dataBase.newsDao())
-    }
-
-    @Test
-    fun fetchArticles_otherError_complete() {
+    fun fetchArticles_bothReturnError_assertNoValues() {
+        given(dataBase.newsDao().getArticles())
+            .willReturn(Single.error(Throwable()))
         given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
             .willReturn(Single.error(Throwable()))
 
-        repository.fetchArticles(countryCode).test()
-            .assertNoValues()
+        repository.fetchArticles(countryCode)
+            .test()
             .assertNoErrors()
+            .assertNoValues()
             .assertTerminated()
             .dispose()
-        Mockito.verifyNoMoreInteractions(dataBase.newsDao())
+
+        verify(dataBase.newsDao(), never()).deleteAll()
+        verify(dataBase.newsDao(), never()).insertAll(articles)
     }
 
     @Test
-    fun fetchArticles_succeed_emmitData() {
+    fun fetchArticles_bothReturnData_assertValuesTwice() {
+        given(dataBase.newsDao().getArticles())
+            .willReturn(Single.just(articles))
         given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
             .willReturn(Single.just(TopHeadlinesResponse(Status.Ok, articles)))
-        given(dataBase.newsDao().deleteAll()).willReturn(Completable.complete())
 
-        repository.fetchArticles(countryCode).test()
-            .assertNoValues()
+        repository.fetchArticles(countryCode)
+            .test()
             .assertNoErrors()
-            .assertTerminated()
+            .assertValueCount(2)
+            .assertValues(articles, articles)
+            .assertComplete()
             .dispose()
-        Mockito.verify(dataBase.newsDao()).deleteAll()
-        Mockito.verify(dataBase.newsDao()).insertAll(articles)
+
+        verify(dataBase.newsDao()).deleteAll()
+        verify(dataBase.newsDao()).insertAll(articles)
+    }
+
+    @Test
+    fun fetchArticles_fetchFromDBSuccess_fetchFromServerError_assertValueFromDB() {
+        given(dataBase.newsDao().getArticles())
+            .willReturn(Single.just(articles))
+        given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
+            .willReturn(Single.error(Throwable()))
+
+        repository.fetchArticles(countryCode)
+            .test()
+            .assertNoErrors()
+            .assertValueCount(1)
+            .assertValues(articles)
+            .assertComplete()
+            .dispose()
+
+        verify(dataBase.newsDao(), never()).deleteAll()
+        verify(dataBase.newsDao(), never()).insertAll(articles)
+    }
+
+    @Test
+    fun fetchArticles_fetchFromDBError_fetchFromServerSuccess_assertValueFromServer() {
+        given(dataBase.newsDao().getArticles())
+            .willReturn(Single.error(Throwable()))
+        given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
+            .willReturn(Single.just(TopHeadlinesResponse(Status.Ok, articles)))
+
+        repository.fetchArticles(countryCode)
+            .test()
+            .assertNoErrors()
+            .assertValueCount(1)
+            .assertValues(articles)
+            .assertComplete()
+            .dispose()
+
+        verify(dataBase.newsDao()).deleteAll()
+        verify(dataBase.newsDao()).insertAll(articles)
     }
 }

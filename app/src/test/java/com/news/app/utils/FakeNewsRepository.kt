@@ -2,20 +2,16 @@ package com.news.app.utils
 
 import com.news.app.model.Article
 import com.news.app.ui.list.NewsListRepository
-import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.Flowable
 
-class FakeNewsRepository : NewsListRepository {
-    override fun observeArticles(): Observable<List<Article>> {
-        return Observable.just(
-            arrayListOf(
-                Article(0, "title1", "author1", "", "", "", "", ""),
-                Article(1, "title2", "author2", "", "", "", "", "")
-            )
-        )
+class FakeNewsRepositorySuccess : NewsListRepository {
+    override fun fetchArticles(countryCode: String): Flowable<List<Article>> {
+        return Flowable.just(FakeDataProvider.mockArticles())
     }
+}
 
-    override fun fetchArticles(countryCode: String): Completable {
-        return Completable.complete()
+class FakeNewsRepositoryError : NewsListRepository {
+    override fun fetchArticles(countryCode: String): Flowable<List<Article>> {
+        return Flowable.error(Throwable())
     }
 }
