@@ -7,7 +7,10 @@
     android:layout_height="match_parent"
     >
 
-    <include layout="@layout/shimmer_main_layout" />
+    <include
+        android:id="@+id/shimmerLayout"
+        layout="@layout/shimmer_main_layout"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/articlesRecyclerView"

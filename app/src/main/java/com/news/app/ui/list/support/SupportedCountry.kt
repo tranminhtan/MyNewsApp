@@ -66,7 +66,7 @@ class SupportedCountry @Inject constructor() {
     )
 
     fun getCountryCode(): String {
-        return Locale.getDefault().country.toLowerCase(Locale.getDefault()).let {
+        return Locale.getDefault().country.lowercase().let {
             if (supportedCountry.contains(it)) {
                 it
             } else {
