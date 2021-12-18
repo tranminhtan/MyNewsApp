@@ -1,6 +1,7 @@
 package com.news.app.ui.list.support
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.news.app.ui.list.OnArticleClickListenerImpl
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test

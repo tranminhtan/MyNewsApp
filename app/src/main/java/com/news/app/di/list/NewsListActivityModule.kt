@@ -6,8 +6,8 @@ import com.news.app.annotation.ViewModelKey
 import com.news.app.repository.NewsListRepository
 import com.news.app.repository.NewsListRepositoryImpl
 import com.news.app.ui.list.NewsListViewModel
-import com.news.app.ui.list.support.OnArticleClickListener
-import com.news.app.ui.list.support.OnArticleClickListenerImpl
+import com.news.app.ui.list.OnArticleClickListener
+import com.news.app.ui.list.OnArticleClickListenerImpl
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

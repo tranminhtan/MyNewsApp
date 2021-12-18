@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.news.app.databinding.ActivityNewsListBinding
 import com.news.app.model.ArticleItem
 import com.news.app.ui.detail.NewsDetailActivity
-import com.news.app.ui.list.support.OnArticleClickListener
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 

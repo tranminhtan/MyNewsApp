@@ -25,7 +25,7 @@ class NewsDetailActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ViewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_news_detail)
-        val id: Long = intent.extras?.getLong(EXTRA_ARTICLE) ?: 0
+        val id: Int = intent.extras?.getInt(EXTRA_ARTICLE) ?: 0
 
         fetchArticleUseCase.fetchArticleById(id)
             .subscribe(
@@ -34,7 +34,7 @@ class NewsDetailActivity : DaggerAppCompatActivity() {
                     binding.setVariable(BR.item, article)
                     binding.setVariable(BR.spaceVisibility, visibility)
                 },
-                { error: Throwable -> Timber.e(error) }
+                { error: Throwable -> Timber.w(error) }
             )
     }
 }

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.news.app.BR
 import com.news.app.R
 import com.news.app.model.ArticleItem
-import com.news.app.ui.list.support.OnArticleClickListener
 import javax.inject.Inject
 
 class NewsListAdapter @Inject constructor(

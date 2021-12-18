@@ -16,7 +16,7 @@ class MyApplication : DaggerApplication() {
         super.onCreate()
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
-            RxJavaPlugins.setErrorHandler { Timber.e(it) }
+            RxJavaPlugins.setErrorHandler { Timber.w(it) }
         }
     }
 }

@@ -21,14 +21,14 @@ class NewsListViewModel @Inject constructor(
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun observeTopHeadlines() {
         observeArticlesUseCase.fetchArticles()
-            .subscribe({ _articles.postValue(it) }, { Timber.e(it) })
+            .subscribe({ _articles.postValue(it) }, { Timber.w(it) })
             .let { disposables.add(it) }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun fetchTopHeadlines() {
         fetchTopHeadlinesUseCase.fetchTopHeadlines()
-            .subscribe({}, { Timber.e(it) })
+            .subscribe({}, { Timber.w(it) })
             .let { disposables.add(it) }
     }
 

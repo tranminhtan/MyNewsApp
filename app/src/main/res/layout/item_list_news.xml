@@ -9,7 +9,7 @@
 
         <variable
             name="onArticleClickListener"
-            type="com.news.app.ui.list.support.OnArticleClickListener"
+            type="com.news.app.ui.list.OnArticleClickListener"
             />
 
         <variable

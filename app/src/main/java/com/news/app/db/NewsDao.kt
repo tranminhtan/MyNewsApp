@@ -13,7 +13,7 @@ interface NewsDao {
     fun getArticles(): Observable<List<Article>>
 
     @Query("SELECT * FROM article WHERE id = :id LIMIT 1")
-    fun getArticleById(id: Long): Single<Article>
+    fun getArticleById(id: Int): Single<Article>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(articles: List<Article>): Completable

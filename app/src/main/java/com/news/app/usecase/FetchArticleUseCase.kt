@@ -9,7 +9,7 @@ import javax.inject.Inject
 class FetchArticleUseCase @Inject constructor(
     private val repository: NewsListRepository,
 ) {
-    fun fetchArticleById(id: Long): Single<ArticleItem> =
+    fun fetchArticleById(id: Int): Single<ArticleItem> =
         repository.fetchArticleById(id)
             .map { it.toArticleItem() }
 }

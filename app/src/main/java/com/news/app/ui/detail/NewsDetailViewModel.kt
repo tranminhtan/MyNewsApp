@@ -19,7 +19,7 @@ class NewsDetailViewModel @Inject constructor(
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun fetchArticles() {
         disposable = observeArticlesUseCase.fetchArticles()
-            .subscribe({ _articles.postValue(it) }, { Timber.e(it) })
+            .subscribe({ _articles.postValue(it) }, { Timber.w(it) })
     }
 
     override fun onCleared() {

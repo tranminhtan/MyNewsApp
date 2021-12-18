@@ -9,13 +9,13 @@ import com.squareup.moshi.JsonClass
 @Entity(tableName = "article")
 @JsonClass(generateAdapter = true)
 data class Article(
-    @PrimaryKey
-    @ColumnInfo(name = "id")
-    val id: Long = System.currentTimeMillis(),
-
     @ColumnInfo(name = "title")
     @Json(name = "title")
     val title: String,
+
+    @PrimaryKey
+    @ColumnInfo(name = "id")
+    val id: Int = title.hashCode(),
 
     @ColumnInfo(name = "author")
     @Json(name = "author")
@@ -43,7 +43,7 @@ data class Article(
 )
 
 data class ArticleItem(
-    val id: Long,
+    val id: Int,
     val title: String,
     val author: String,
     val description: String,

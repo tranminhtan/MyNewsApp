@@ -12,7 +12,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 interface NewsListRepository {
-    fun fetchArticleById(id: Long): Single<Article>
+    fun fetchArticleById(id: Int): Single<Article>
     fun fetchTopHeadlines(countryCode: String = "gb"): Completable
     fun observeArticles(): Observable<List<Article>>
 }
@@ -25,7 +25,7 @@ class NewsListRepositoryImpl @Inject constructor(
 
     private val newsDao by lazy { database.newsDao() }
 
-    override fun fetchArticleById(id: Long): Single<Article> =
+    override fun fetchArticleById(id: Int): Single<Article> =
         newsDao.getArticleById(id)
             .subscribeOn(schedulersProvider.io())
 
@@ -37,7 +37,7 @@ class NewsListRepositoryImpl @Inject constructor(
             .flatMapCompletable { articles ->
                 saveArticles(articles)
             }
-            .doOnError { e -> Timber.e(e) }
+            .doOnError { e -> Timber.w(e) }
             .onErrorComplete()
     }
 
@@ -49,7 +49,7 @@ class NewsListRepositoryImpl @Inject constructor(
 
     private fun saveArticles(articles: List<Article>): Completable {
         return Completable.fromCallable { newsDao.updateData(articles) }
-            .doOnError { e -> Timber.e(e) }
+            .doOnError { e -> Timber.w(e) }
             .onErrorComplete()
     }
 }
