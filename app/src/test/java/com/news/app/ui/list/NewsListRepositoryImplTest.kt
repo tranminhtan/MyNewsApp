@@ -45,7 +45,7 @@ class NewsListRepositoryImplTest : TestBase() {
         given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
             .willReturn(Single.error(Throwable()))
 
-        repository.fetchTopHeadlines(countryCode)
+        repository.fetchTopArticles(countryCode)
             .test()
             .assertNoErrors()
             .assertNoValues()
@@ -63,7 +63,7 @@ class NewsListRepositoryImplTest : TestBase() {
         given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
             .willReturn(Single.just(TopHeadlinesResponse(Status.Ok, articles)))
 
-        repository.fetchTopHeadlines(countryCode)
+        repository.fetchTopArticles(countryCode)
             .test()
             .assertNoErrors()
             .assertValueCount(2)
@@ -82,7 +82,7 @@ class NewsListRepositoryImplTest : TestBase() {
         given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
             .willReturn(Single.error(Throwable()))
 
-        repository.fetchTopHeadlines(countryCode)
+        repository.fetchTopArticles(countryCode)
             .test()
             .assertNoErrors()
             .assertValueCount(1)
@@ -101,7 +101,7 @@ class NewsListRepositoryImplTest : TestBase() {
         given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
             .willReturn(Single.just(TopHeadlinesResponse(Status.Ok, articles)))
 
-        repository.fetchTopHeadlines(countryCode)
+        repository.fetchTopArticles(countryCode)
             .test()
             .assertNoErrors()
             .assertValueCount(1)

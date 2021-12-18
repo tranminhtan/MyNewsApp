@@ -1,4 +1,4 @@
-package com.news.app.usecase
+package com.news.app.interactor
 
 import com.news.app.model.ArticleItem
 import com.news.app.model.toArticleItem
@@ -6,10 +6,10 @@ import com.news.app.repository.NewsListRepository
 import io.reactivex.Single
 import javax.inject.Inject
 
-class FetchArticleUseCase @Inject constructor(
+class FetchArticleInteractor @Inject constructor(
     private val repository: NewsListRepository,
 ) {
-    fun fetchArticleById(id: Int): Single<ArticleItem> =
+    operator fun invoke(id: Int): Single<ArticleItem> =
         repository.fetchArticleById(id)
             .map { it.toArticleItem() }
 }

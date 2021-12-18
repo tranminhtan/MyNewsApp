@@ -1,25 +1,27 @@
 package com.news.app.ui.detail
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.news.app.model.ArticleItem
-import com.news.app.usecase.ObserveArticlesUseCase
+import com.news.app.interactor.FetchArticleInteractor
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import javax.inject.Inject
 
 class NewsDetailViewModel @Inject constructor(
-    private val observeArticlesUseCase: ObserveArticlesUseCase
+    private val fetchArticleInteractor: FetchArticleInteractor
 ) : ViewModel(), LifecycleObserver {
 
     private lateinit var disposable: Disposable
 
-    private val _articles = MutableLiveData<List<ArticleItem>>()
-    val articles: LiveData<List<ArticleItem>> = _articles
+    private val _article = MutableLiveData<ArticleItem>()
+    val article: LiveData<ArticleItem> = _article
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun fetchArticles() {
-        disposable = observeArticlesUseCase.fetchArticles()
-            .subscribe({ _articles.postValue(it) }, { Timber.w(it) })
+    fun fetchArticle(id: Int) {
+        disposable = fetchArticleInteractor(id)
+            .subscribe({ _article.postValue(it) }, { Timber.w(it) })
     }
 
     override fun onCleared() {

@@ -26,7 +26,7 @@ class NewsListAdapter @Inject constructor(
     override fun onBindViewHolder(holder: ArticleViewModel, position: Int) =
         holder.bind(getItem(position))
 
-    override fun getItemViewType(position: Int): Int = R.layout.item_list_news
+    override fun getItemViewType(position: Int): Int = R.layout.item_news_list
 }
 
 class ArticleViewModel(

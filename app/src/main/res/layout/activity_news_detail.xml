@@ -32,12 +32,12 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/header_height"
+                android:layout_height="@dimen/image_item_height"
                 android:layout_marginBottom="8dp"
                 android:contentDescription="@null"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 app:imageFromUrl="@{item.imageUrl}"
-                app:placeholder="@{@drawable/ic_placeholder_big}"
+                app:placeholder="@{@drawable/ic_placeholder}"
                 tools:background="@android:color/black"
                 />
 

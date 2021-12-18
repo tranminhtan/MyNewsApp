@@ -1,4 +1,4 @@
-package com.news.app.usecase
+package com.news.app.interactor
 
 import com.news.app.model.ArticleItem
 import com.news.app.model.toArticleItem
@@ -6,11 +6,11 @@ import com.news.app.repository.NewsListRepository
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class ObserveArticlesUseCase @Inject constructor(
+class ObserveArticlesInteractor @Inject constructor(
     private val repository: NewsListRepository,
 ) {
-    fun fetchArticles(): Observable<List<ArticleItem>> {
-        return repository.observeArticles()
+    operator fun invoke(): Observable<List<ArticleItem>> {
+        return repository.observeTopArticles()
             .switchMapSingle { articles ->
                 Observable.fromIterable(articles)
                     .map { it.toArticleItem() }

@@ -2,7 +2,7 @@ package com.news.app.ui.list
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.news.app.TestBase
-import com.news.app.usecase.ObserveArticlesUseCase
+import com.news.app.interactor.ObserveArticlesInteractor
 import com.news.app.utils.FakeDataProvider
 import io.reactivex.Flowable
 import org.junit.Assert
@@ -17,37 +17,37 @@ class NewsListViewModelTest : TestBase() {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    lateinit var observeUseCase: ObserveArticlesUseCase
+    lateinit var observeInteractor: ObserveArticlesInteractor
     private lateinit var viewModel: NewsListViewModel
 
     override fun setup() {
         super.setup()
-        viewModel = NewsListViewModel(observeUseCase)
+        viewModel = NewsListViewModel(observeInteractor)
     }
 
     @Test
     fun fetchArticles_returnError_assertArticlesNull() {
-        given(observeUseCase.fetchArticles()).willReturn(Flowable.error(Throwable()))
+        given(observeInteractor.observeTopArticles()).willReturn(Flowable.error(Throwable()))
 
-        viewModel.observeTopHeadlines()
+        viewModel.fetchTopArticles()
 
         Assert.assertNull(viewModel.articles.value)
     }
 
     @Test
     fun fetchArticles_returnEmpty_assertArticlesEmpty() {
-        given(observeUseCase.fetchArticles()).willReturn(Flowable.just(emptyList()))
+        given(observeInteractor.observeTopArticles()).willReturn(Flowable.just(emptyList()))
 
-        viewModel.observeTopHeadlines()
+        viewModel.fetchTopArticles()
 
         Assert.assertTrue(viewModel.articles.value!!.isEmpty())
     }
 
     @Test
     fun fetchArticles_returnArticles_assertEqualThat() {
-        given(observeUseCase.fetchArticles()).willReturn(Flowable.just(FakeDataProvider.mockArticleItems()))
+        given(observeInteractor.observeTopArticles()).willReturn(Flowable.just(FakeDataProvider.mockArticleItems()))
 
-        viewModel.observeTopHeadlines()
+        viewModel.fetchTopArticles()
 
         Assert.assertEquals(FakeDataProvider.mockArticleItems(), viewModel.articles.value)
     }

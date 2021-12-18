@@ -4,47 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?selectableItemBackground"
-    android:orientation="horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingEnd="16dp"
     android:paddingStart="16dp"
     android:paddingTop="8dp"
-    android:paddingEnd="16dp"
-    android:paddingBottom="8dp"
     >
 
     <View
-        android:layout_width="@dimen/image_item_width"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/image_item_height"
         android:background="@color/shimmer_color"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/shimmer_text_height"
+        android:layout_margin="8dp"
+        android:background="@color/shimmer_color"
+        />
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/shimmer_text_height"
-            android:layout_margin="8dp"
-            android:background="@color/shimmer_color"
-            />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/shimmer_text_height"
+        android:layout_margin="8dp"
+        android:background="@color/shimmer_color"
+        />
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/shimmer_text_height"
-            android:layout_margin="8dp"
-            android:background="@color/shimmer_color"
-            />
-
-        <View
-            android:layout_width="100dp"
-            android:layout_height="@dimen/shimmer_text_height"
-            android:layout_margin="8dp"
-            android:background="@color/shimmer_color"
-            />
-
-    </LinearLayout>
+    <View
+        android:layout_width="100dp"
+        android:layout_height="@dimen/shimmer_text_height"
+        android:layout_margin="8dp"
+        android:background="@color/shimmer_color"
+        />
 </LinearLayout>

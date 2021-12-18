@@ -14,8 +14,6 @@
         android:orientation="vertical"
         >
 
-        <include layout="@layout/shimmer_header_layout" />
-
         <include layout="@layout/shimmer_item_layout" />
 
         <include layout="@layout/shimmer_item_layout" />

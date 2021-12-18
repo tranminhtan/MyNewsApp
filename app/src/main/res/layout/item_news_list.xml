@@ -21,13 +21,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?selectableItemBackground"
+        android:background="?selectableItemBackgroundBorderless"
         android:onClick="@{() -> onArticleClickListener.onClickArticle(item)}"
         android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp"
         >
 
         <ImageView
@@ -36,15 +36,15 @@
             android:contentDescription="@null"
             android:scaleType="centerCrop"
             app:imageFromUrl="@{item.imageUrl}"
-            app:placeholder="@{@drawable/ic_placeholder_small}"
-            tools:src="@drawable/ic_placeholder_small"
+            app:placeholder="@{@drawable/ic_placeholder}"
+            tools:src="@drawable/ic_placeholder"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:ellipsize="end"
+            android:maxLines="3"
             android:text="@{item.title}"
             android:textColor="@android:color/black"
             android:textSize="15sp"

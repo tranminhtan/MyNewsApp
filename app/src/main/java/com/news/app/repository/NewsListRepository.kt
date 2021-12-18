@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 interface NewsListRepository {
     fun fetchArticleById(id: Int): Single<Article>
-    fun fetchTopHeadlines(countryCode: String = "gb"): Completable
-    fun observeArticles(): Observable<List<Article>>
+    fun fetchTopArticles(countryCode: String = "gb"): Completable
+    fun observeTopArticles(): Observable<List<Article>>
 }
 
 class NewsListRepositoryImpl @Inject constructor(
@@ -29,7 +29,7 @@ class NewsListRepositoryImpl @Inject constructor(
         newsDao.getArticleById(id)
             .subscribeOn(schedulersProvider.io())
 
-    override fun fetchTopHeadlines(countryCode: String): Completable {
+    override fun fetchTopArticles(countryCode: String): Completable {
         return newsService.getTopHeadlines(countryCode)
             .subscribeOn(schedulersProvider.io())
             .filter { response -> response.status == Status.Ok && !response.articles.isNullOrEmpty() }
@@ -41,7 +41,7 @@ class NewsListRepositoryImpl @Inject constructor(
             .onErrorComplete()
     }
 
-    override fun observeArticles(): Observable<List<Article>> =
+    override fun observeTopArticles(): Observable<List<Article>> =
         newsDao.getArticles()
             .subscribeOn(schedulersProvider.io())
             .filter { list -> list.isNotEmpty() }
