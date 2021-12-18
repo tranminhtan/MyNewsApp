@@ -2,13 +2,13 @@ package com.news.app.ui.detail
 
 import androidx.lifecycle.*
 import com.news.app.model.ArticleItem
-import com.news.app.usecase.FetchArticlesUseCase
+import com.news.app.usecase.ObserveArticlesUseCase
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import javax.inject.Inject
 
 class NewsDetailViewModel @Inject constructor(
-    private val fetchArticlesUseCase: FetchArticlesUseCase
+    private val observeArticlesUseCase: ObserveArticlesUseCase
 ) : ViewModel(), LifecycleObserver {
 
     private lateinit var disposable: Disposable
@@ -18,7 +18,7 @@ class NewsDetailViewModel @Inject constructor(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun fetchArticles() {
-        disposable = fetchArticlesUseCase.fetchArticles()
+        disposable = observeArticlesUseCase.fetchArticles()
             .subscribe({ _articles.postValue(it) }, { Timber.e(it) })
     }
 

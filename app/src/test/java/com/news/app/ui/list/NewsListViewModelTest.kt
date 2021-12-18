@@ -2,7 +2,7 @@ package com.news.app.ui.list
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.news.app.TestBase
-import com.news.app.usecase.FetchArticlesUseCase
+import com.news.app.usecase.ObserveArticlesUseCase
 import com.news.app.utils.FakeDataProvider
 import io.reactivex.Flowable
 import org.junit.Assert
@@ -17,37 +17,37 @@ class NewsListViewModelTest : TestBase() {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    lateinit var fetchUseCase: FetchArticlesUseCase
+    lateinit var observeUseCase: ObserveArticlesUseCase
     private lateinit var viewModel: NewsListViewModel
 
     override fun setup() {
         super.setup()
-        viewModel = NewsListViewModel(fetchUseCase)
+        viewModel = NewsListViewModel(observeUseCase)
     }
 
     @Test
     fun fetchArticles_returnError_assertArticlesNull() {
-        given(fetchUseCase.fetchArticles()).willReturn(Flowable.error(Throwable()))
+        given(observeUseCase.fetchArticles()).willReturn(Flowable.error(Throwable()))
 
-        viewModel.fetchArticles()
+        viewModel.observeTopHeadlines()
 
         Assert.assertNull(viewModel.articles.value)
     }
 
     @Test
     fun fetchArticles_returnEmpty_assertArticlesEmpty() {
-        given(fetchUseCase.fetchArticles()).willReturn(Flowable.just(emptyList()))
+        given(observeUseCase.fetchArticles()).willReturn(Flowable.just(emptyList()))
 
-        viewModel.fetchArticles()
+        viewModel.observeTopHeadlines()
 
         Assert.assertTrue(viewModel.articles.value!!.isEmpty())
     }
 
     @Test
     fun fetchArticles_returnArticles_assertEqualThat() {
-        given(fetchUseCase.fetchArticles()).willReturn(Flowable.just(FakeDataProvider.mockArticleItems()))
+        given(observeUseCase.fetchArticles()).willReturn(Flowable.just(FakeDataProvider.mockArticleItems()))
 
-        viewModel.fetchArticles()
+        viewModel.observeTopHeadlines()
 
         Assert.assertEquals(FakeDataProvider.mockArticleItems(), viewModel.articles.value)
     }

@@ -18,72 +18,78 @@
             />
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp"
         >
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/header_height"
-            android:layout_marginBottom="8dp"
-            android:contentDescription="@null"
-            android:scaleType="fitXY"
-            app:imageFromUrl="@{item.imageUrl}"
-            app:placeholder="@{@drawable/ic_placeholder_big}"
-            tools:background="@android:color/black"
-            />
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:text="@{item.title}"
-            android:textColor="@android:color/black"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            tools:text="Trump, who wanted a TV legal team, is 'distracted' by impeachment trial, source says - CNN"
-            />
+            android:orientation="vertical"
+            >
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="16dp"
-            android:visibility="@{spaceVisibility}"
-            />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_height"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                app:imageFromUrl="@{item.imageUrl}"
+                app:placeholder="@{@drawable/ic_placeholder_big}"
+                tools:background="@android:color/black"
+                />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:text="@{item.description}"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
-            android:textStyle="italic"
-            tools:text="Trump, who wanted a TV legal team, is 'distracted' by impeachment trial, source says - CNN"
-            />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="@{item.title}"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                tools:text="Trump, who wanted a TV legal team, is 'distracted' by impeachment trial, source says - CNN"
+                />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="16dp"
-            android:visibility="@{spaceVisibility}"
-            />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:visibility="@{spaceVisibility}"
+                />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:text="@{item.content}"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
-            tools:text="Trump, who wanted a TV legal team, is 'distracted' by impeachment trial, source says - CNN"
-            />
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="@{item.description}"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="italic"
+                tools:text="Trump, who wanted a TV legal team, is 'distracted' by impeachment trial, source says - CNN"
+                />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:visibility="@{spaceVisibility}"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="@{item.content}"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                tools:text="Trump, who wanted a TV legal team, is 'distracted' by impeachment trial, source says - CNN"
+                />
+        </LinearLayout>
+    </ScrollView>
 </layout>

@@ -43,11 +43,9 @@ class ArticleViewModel(
 }
 
 class ArticleDiffUtil : DiffUtil.ItemCallback<ArticleItem>() {
-    override fun areItemsTheSame(oldItem: ArticleItem, newItem: ArticleItem): Boolean {
-        return oldItem.title == newItem.title
-    }
+    override fun areItemsTheSame(oldItem: ArticleItem, newItem: ArticleItem): Boolean =
+        oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: ArticleItem, newItem: ArticleItem): Boolean {
-        return oldItem == newItem
-    }
+    override fun areContentsTheSame(oldItem: ArticleItem, newItem: ArticleItem): Boolean =
+        oldItem.title == newItem.title && oldItem.imageUrl == newItem.imageUrl
 }

@@ -6,6 +6,7 @@ import com.news.app.base.MockSchedulerProvider
 import com.news.app.model.Status
 import com.news.app.model.TopHeadlinesResponse
 import com.news.app.network.NewsService
+import com.news.app.repository.NewsListRepositoryImpl
 import com.news.app.utils.FakeDataBase
 import com.news.app.utils.FakeDataProvider
 import io.reactivex.Completable
@@ -44,7 +45,7 @@ class NewsListRepositoryImplTest : TestBase() {
         given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
             .willReturn(Single.error(Throwable()))
 
-        repository.fetchArticles(countryCode)
+        repository.fetchTopHeadlines(countryCode)
             .test()
             .assertNoErrors()
             .assertNoValues()
@@ -62,7 +63,7 @@ class NewsListRepositoryImplTest : TestBase() {
         given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
             .willReturn(Single.just(TopHeadlinesResponse(Status.Ok, articles)))
 
-        repository.fetchArticles(countryCode)
+        repository.fetchTopHeadlines(countryCode)
             .test()
             .assertNoErrors()
             .assertValueCount(2)
@@ -81,7 +82,7 @@ class NewsListRepositoryImplTest : TestBase() {
         given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
             .willReturn(Single.error(Throwable()))
 
-        repository.fetchArticles(countryCode)
+        repository.fetchTopHeadlines(countryCode)
             .test()
             .assertNoErrors()
             .assertValueCount(1)
@@ -100,7 +101,7 @@ class NewsListRepositoryImplTest : TestBase() {
         given(service.getTopHeadlines(BuildConfig.API_KEY, countryCode))
             .willReturn(Single.just(TopHeadlinesResponse(Status.Ok, articles)))
 
-        repository.fetchArticles(countryCode)
+        repository.fetchTopHeadlines(countryCode)
             .test()
             .assertNoErrors()
             .assertValueCount(1)

@@ -10,7 +10,7 @@ class FetchArticlesUseCaseTest {
 
     @Test
     fun fetchArticles_error_assertError() {
-        val useCase = FetchArticlesUseCase(FakeNewsRepositoryError(), SupportedCountry())
+        val useCase = ObserveArticlesUseCase(FakeNewsRepositoryError(), SupportedCountry())
         useCase.fetchArticles().test()
             .assertError(Throwable::class.java)
             .assertTerminated()
@@ -20,7 +20,7 @@ class FetchArticlesUseCaseTest {
 
     @Test
     fun fetchArticles_success_assertThat() {
-        val useCase = FetchArticlesUseCase(FakeNewsRepositorySuccess(), SupportedCountry())
+        val useCase = ObserveArticlesUseCase(FakeNewsRepositorySuccess(), SupportedCountry())
         useCase.fetchArticles().test()
             .assertNoErrors()
             .assertComplete()

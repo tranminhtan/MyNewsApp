@@ -51,3 +51,14 @@ data class ArticleItem(
     val imageUrl: String,
     val content: String
 )
+
+fun Article.toArticleItem() =
+    ArticleItem(
+        id = id,
+        title = title,
+        author = author ?: "",
+        description = description ?: "",
+        url = url ?: "",
+        imageUrl = imageUrl ?: "",
+        content = content ?: ""
+    )
