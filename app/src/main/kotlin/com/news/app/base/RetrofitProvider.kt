@@ -36,16 +36,13 @@ class RetrofitProvider(
     }
 
     private fun getLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-            override fun log(message: String) {
-                Timber.d(message)
-            }
-        }).setLevel(
-            if (BuildConfig.DEBUG) {
-                HttpLoggingInterceptor.Level.BODY
-            } else {
-                HttpLoggingInterceptor.Level.NONE
-            }
-        )
+        return HttpLoggingInterceptor { message -> Timber.d(message) }
+            .setLevel(
+                if (BuildConfig.DEBUG) {
+                    HttpLoggingInterceptor.Level.BODY
+                } else {
+                    HttpLoggingInterceptor.Level.NONE
+                }
+            )
     }
 }

@@ -7,9 +7,8 @@ import com.news.app.base.RetrofitProvider
 import com.news.app.base.SchedulersProvider
 import com.news.app.base.SchedulersProviderImpl
 import com.news.app.db.NewsDatabase
-import com.news.app.moshi.MoshiProvider
+import com.news.app.moshi.NewsJsonAdapterFactory
 import com.news.app.network.NewsService
-import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -24,8 +23,10 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideMoshi(factories: Set<@JvmSuppressWildcards JsonAdapter.Factory>): Moshi {
-        return MoshiProvider(factories).getMoshi()
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder()
+            .add(NewsJsonAdapterFactory())
+            .build()
     }
 
     @Singleton

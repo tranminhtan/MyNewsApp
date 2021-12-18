@@ -3,7 +3,6 @@ package com.news.app.di
 import android.app.Application
 import com.news.app.MyApplication
 import com.news.app.di.activity.ActivityBindingModule
-import com.news.app.di.jsonfactory.JsonAdapterModule
 import com.news.app.di.vm.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
@@ -16,7 +15,6 @@ import javax.inject.Singleton
     modules = [
         AndroidSupportInjectionModule::class,
         AppModule::class,
-        JsonAdapterModule::class,
         ViewModelModule::class,
         ActivityBindingModule::class]
 )
