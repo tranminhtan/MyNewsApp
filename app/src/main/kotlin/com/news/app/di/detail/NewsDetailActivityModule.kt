@@ -18,7 +18,5 @@ abstract class NewsDetailActivityModule {
     @Binds
     @IntoMap
     @ViewModelKey(NewsDetailViewModel::class)
-    abstract fun bindNewsListViewModel(
-        viewModel: NewsDetailViewModel
-    ): ViewModel
+    abstract fun bindNewsListViewModel(viewModel: NewsDetailViewModel): ViewModel
 }

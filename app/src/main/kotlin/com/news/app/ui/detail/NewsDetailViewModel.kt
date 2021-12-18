@@ -4,14 +4,14 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.news.app.model.ArticleItem
 import com.news.app.interactor.FetchArticleInteractor
+import com.news.app.model.ArticleItem
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import javax.inject.Inject
 
 class NewsDetailViewModel @Inject constructor(
-    private val fetchArticleInteractor: FetchArticleInteractor
+    private val fetchArticleInteractor: FetchArticleInteractor,
 ) : ViewModel(), LifecycleObserver {
 
     private lateinit var disposable: Disposable

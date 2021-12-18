@@ -1,5 +1,5 @@
 News App
-There're 2 activities
+There are 2 activities
 - NewsListActivity - shows top news articles 
 - NewsDetailActivity - simple one
 

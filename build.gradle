@@ -21,7 +21,7 @@ buildscript {
         mockitoVersion = '3.9.0'
         mockitoKotlinVersion = '1.5.0'
         uiAutomatorVersion = '2.2.0'
-        daggerVersion = '2.26'
+        daggerVersion = '2.35.1'
         timberVersion = '4.7.1'
         okHttpVersion = '4.9.1'
         retrofitVersion = '2.9.0'
