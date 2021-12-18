@@ -13,7 +13,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 interface NewsListRepository {
-    fun fetchArticles(countryCode: String): Flowable<List<Article>>
+    fun fetchArticles(countryCode: String = "gb"): Flowable<List<Article>>
+    fun fetchArticleById(id: Long): Single<Article>
 }
 
 class NewsListRepositoryImpl @Inject constructor(
@@ -29,6 +30,10 @@ class NewsListRepositoryImpl @Inject constructor(
             .filter { list -> list.isNotEmpty() }
             .onBackpressureLatest()
     }
+
+    override fun fetchArticleById(id: Long): Single<Article> =
+        database.newsDao().getArticleById(id)
+            .subscribeOn(schedulersProvider.io())
 
     private fun fetchArticlesFromDB(): Single<List<Article>> {
         return database.newsDao().getArticles()

@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.news.app.BR
 import com.news.app.R
-import com.news.app.ui.list.support.ArticleItem
+import com.news.app.model.ArticleItem
 import com.news.app.ui.list.support.OnArticleClickListener
+import javax.inject.Inject
 
-class NewsListAdapter(
+class NewsListAdapter @Inject constructor(
     private val onArticleClickListener: OnArticleClickListener
 ) : ListAdapter<ArticleItem, ArticleViewModel>(ArticleDiffUtil()) {
 
@@ -23,17 +24,10 @@ class NewsListAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: ArticleViewModel, position: Int) {
+    override fun onBindViewHolder(holder: ArticleViewModel, position: Int) =
         holder.bind(getItem(position))
-    }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (position == 0) {
-            R.layout.item_list_news_header
-        } else {
-            R.layout.item_list_news
-        }
-    }
+    override fun getItemViewType(position: Int): Int = R.layout.item_list_news
 }
 
 class ArticleViewModel(

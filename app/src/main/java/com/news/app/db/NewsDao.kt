@@ -13,6 +13,9 @@ interface NewsDao {
     @Query("SELECT * FROM article")
     fun getArticles(): Single<List<Article>>
 
+    @Query("SELECT * FROM article WHERE id = :id LIMIT 1")
+    fun getArticleById(id: Long): Single<Article>
+
     @Insert
     fun insertAll(articles: List<Article>): Completable
 

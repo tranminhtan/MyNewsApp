@@ -14,7 +14,7 @@
 
         <variable
             name="item"
-            type="com.news.app.ui.list.support.ArticleItem"
+            type="com.news.app.model.ArticleItem"
             />
     </data>
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:background="?selectableItemBackground"
         android:onClick="@{() -> onArticleClickListener.onClickArticle(item)}"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingStart="16dp"
         android:paddingTop="8dp"
         android:paddingEnd="16dp"
@@ -31,7 +31,7 @@
         >
 
         <ImageView
-            android:layout_width="@dimen/image_item_width"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/image_item_height"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
@@ -44,7 +44,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:ellipsize="end"
             android:text="@{item.title}"
             android:textColor="@android:color/black"

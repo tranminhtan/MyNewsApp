@@ -2,6 +2,7 @@ package com.news.app.ui.list.support
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.news.app.model.ArticleItem
 import javax.inject.Inject
 
 interface OnArticleClickListener {

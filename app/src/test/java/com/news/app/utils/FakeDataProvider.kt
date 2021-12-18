@@ -1,7 +1,7 @@
 package com.news.app.utils
 
 import com.news.app.model.Article
-import com.news.app.ui.list.support.ArticleItem
+import com.news.app.model.ArticleItem
 
 object FakeDataProvider {
     fun mockArticles(): List<Article> {
@@ -13,8 +13,8 @@ object FakeDataProvider {
 
     fun mockArticleItems(): List<ArticleItem> {
         return arrayListOf(
-            ArticleItem("title1", "author1", "des1", "url1", "", ""),
-            ArticleItem("title2", "author2", "des2", "url2", "", "")
+            ArticleItem(1, "title1", "author1", "des1", "url1", "", ""),
+            ArticleItem(2, "title2", "author2", "des2", "url2", "", "")
         )
     }
 }

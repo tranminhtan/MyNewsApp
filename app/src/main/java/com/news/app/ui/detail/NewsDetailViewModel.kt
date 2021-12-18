@@ -1,4 +1,4 @@
-package com.news.app.ui.list
+package com.news.app.ui.detail
 
 import androidx.lifecycle.*
 import com.news.app.model.ArticleItem
@@ -7,7 +7,7 @@ import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import javax.inject.Inject
 
-class NewsListViewModel @Inject constructor(
+class NewsDetailViewModel @Inject constructor(
     private val fetchArticlesUseCase: FetchArticlesUseCase
 ) : ViewModel(), LifecycleObserver {
 

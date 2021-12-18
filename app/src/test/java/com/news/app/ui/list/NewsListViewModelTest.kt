@@ -2,7 +2,7 @@ package com.news.app.ui.list
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.news.app.TestBase
-import com.news.app.ui.list.usecase.FetchArticlesUseCase
+import com.news.app.usecase.FetchArticlesUseCase
 import com.news.app.utils.FakeDataProvider
 import io.reactivex.Flowable
 import org.junit.Assert

@@ -1,4 +1,4 @@
-package com.news.app.ui.list.usecase
+package com.news.app.usecase
 
 import com.news.app.ui.list.support.SupportedCountry
 import com.news.app.utils.FakeDataProvider
