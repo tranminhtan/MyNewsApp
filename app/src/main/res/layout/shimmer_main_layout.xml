@@ -6,6 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     shimmer:duration="800"
+    shimmer:shimmer_auto_start="true"
     >
 
     <LinearLayout
@@ -24,9 +25,6 @@
 
         <include layout="@layout/shimmer_item_layout" />
 
-        <include layout="@layout/shimmer_item_layout" />
-
-        <include layout="@layout/shimmer_item_layout" />
     </LinearLayout>
 
 </com.facebook.shimmer.ShimmerFrameLayout>
