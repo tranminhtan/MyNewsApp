@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener"
+            />
+
+        <variable
+            name="item"
+            type="com.news.app.model.ArticleItem"
+            />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackgroundBorderless"
+        android:onClick="@{onClickListener}"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/land_image_item_width"
+            android:layout_height="@dimen/land_image_item_height"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            app:imageFromUrl="@{item.imageUrl}"
+            app:placeholder="@{@drawable/ic_placeholder}"
+            tools:src="@drawable/ic_placeholder"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="4"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:text="@{item.title}"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            tools:text="Trump, who wanted a TV legal team, is 'distracted' by impeachment trial, source says - CNN"
+            />
+
+    </LinearLayout>
+
+</layout>

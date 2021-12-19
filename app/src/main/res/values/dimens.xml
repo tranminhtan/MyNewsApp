@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="image_item_height">200dp</dimen>
+    <dimen name="land_image_item_width">160dp</dimen>
+    <dimen name="land_image_item_height">80dp</dimen>
     <dimen name="shimmer_text_height">8dp</dimen>
 </resources>
