@@ -6,6 +6,7 @@ import com.news.app.BuildConfig
 import com.news.app.base.RetrofitProvider
 import com.news.app.base.SchedulersProvider
 import com.news.app.base.SchedulersProviderImpl
+import com.news.app.db.NewsDao
 import com.news.app.db.NewsDatabase
 import com.news.app.moshi.NewsJsonAdapterFactory
 import com.news.app.network.NewsService
@@ -41,9 +42,10 @@ class AppModule {
         return Room.databaseBuilder(application, NewsDatabase::class.java, BuildConfig.DB_NAME).fallbackToDestructiveMigration().build()
     }
 
-    @Singleton
     @Provides
-    fun provideNewsService(retrofit: Retrofit): NewsService {
-        return retrofit.create(NewsService::class.java)
-    }
+    fun provideNewsService(retrofit: Retrofit): NewsService = retrofit.create(NewsService::class.java)
+
+
+    @Provides
+    fun provideNewsDao(newsDatabase: NewsDatabase): NewsDao = newsDatabase.newsDao()
 }

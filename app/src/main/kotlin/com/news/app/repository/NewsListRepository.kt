@@ -1,7 +1,7 @@
 package com.news.app.repository
 
 import com.news.app.base.SchedulersProvider
-import com.news.app.db.NewsDatabase
+import com.news.app.db.NewsDao
 import com.news.app.model.Article
 import com.news.app.model.Status
 import com.news.app.network.NewsService
@@ -18,12 +18,10 @@ interface NewsListRepository {
 }
 
 class NewsListRepositoryImpl @Inject constructor(
-    private val database: NewsDatabase,
+    private val newsDao: NewsDao,
     private val newsService: NewsService,
     private val schedulersProvider: SchedulersProvider
 ) : NewsListRepository {
-
-    private val newsDao by lazy { database.newsDao() }
 
     override fun fetchArticleById(id: Int): Single<Article> =
         newsDao.getArticleById(id)
