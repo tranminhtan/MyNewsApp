@@ -3,9 +3,9 @@ package com.news.app.di
 import android.app.Application
 import androidx.room.Room
 import com.news.app.BuildConfig
-import com.news.app.base.RetrofitProvider
-import com.news.app.base.SchedulersProvider
-import com.news.app.base.SchedulersProviderImpl
+import com.news.app.provider.RetrofitProvider
+import com.news.app.provider.SchedulersProvider
+import com.news.app.provider.SchedulersProviderImpl
 import com.news.app.db.NewsDao
 import com.news.app.db.NewsDatabase
 import com.news.app.moshi.NewsJsonAdapterFactory

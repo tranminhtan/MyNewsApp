@@ -1,4 +1,4 @@
-package com.news.app.base
+package com.news.app.provider
 
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers

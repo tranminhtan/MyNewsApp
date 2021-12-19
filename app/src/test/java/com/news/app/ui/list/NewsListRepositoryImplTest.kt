@@ -2,7 +2,7 @@ package com.news.app.ui.list
 
 import com.news.app.BuildConfig
 import com.news.app.TestBase
-import com.news.app.base.MockSchedulerProvider
+import com.news.app.provider.MockSchedulerProvider
 import com.news.app.model.Status
 import com.news.app.model.TopHeadlinesResponse
 import com.news.app.network.NewsService

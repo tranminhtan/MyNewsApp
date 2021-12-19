@@ -8,8 +8,8 @@
     <data>
 
         <variable
-            name="onArticleClickListener"
-            type="com.news.app.ui.list.OnArticleClickListener"
+            name="onClickListener"
+            type="android.view.View.OnClickListener"
             />
 
         <variable
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?selectableItemBackgroundBorderless"
-        android:onClick="@{() -> onArticleClickListener.onClickArticle(item)}"
+        android:onClick="@{onClickListener}"
         android:orientation="vertical"
         android:paddingBottom="8dp"
         android:paddingEnd="16dp"

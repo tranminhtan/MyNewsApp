@@ -1,6 +1,6 @@
 package com.news.app.repository
 
-import com.news.app.base.SchedulersProvider
+import com.news.app.provider.SchedulersProvider
 import com.news.app.db.NewsDao
 import com.news.app.model.Article
 import com.news.app.model.Status

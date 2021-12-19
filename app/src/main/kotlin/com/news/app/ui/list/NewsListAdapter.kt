@@ -1,6 +1,9 @@
 package com.news.app.ui.list
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -10,16 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.news.app.BR
 import com.news.app.R
 import com.news.app.model.ArticleItem
-import javax.inject.Inject
+import com.news.app.ui.detail.NewsDetailActivity
 
-class NewsListAdapter @Inject constructor(
-    private val onArticleClickListener: OnArticleClickListener
-) : ListAdapter<ArticleItem, ArticleViewModel>(ArticleDiffUtil()) {
+class NewsListAdapter : ListAdapter<ArticleItem, ArticleViewModel>(ArticleDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewModel {
         return ArticleViewModel(
-            DataBindingUtil.inflate(LayoutInflater.from(parent.context), viewType, parent, false),
-            onArticleClickListener
+            DataBindingUtil.inflate(LayoutInflater.from(parent.context), viewType, parent, false)
         )
     }
 
@@ -31,13 +31,21 @@ class NewsListAdapter @Inject constructor(
 
 class ArticleViewModel(
     private val binding: ViewDataBinding,
-    private val onArticleClickListener: OnArticleClickListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(articleItem: ArticleItem) {
+        val onClickListener: View.OnClickListener = View.OnClickListener { view ->
+            navigateToDetail(view.context, articleItem.id)
+        }
         binding.setVariable(BR.item, articleItem)
-        binding.setVariable(BR.onArticleClickListener, onArticleClickListener)
+        binding.setVariable(BR.onClickListener, onClickListener)
         binding.executePendingBindings()
+    }
+
+    private fun navigateToDetail(context: Context, id: Int) {
+        val intent = Intent(context, NewsDetailActivity::class.java)
+        intent.putExtra(NewsDetailActivity.EXTRA_ARTICLE, id)
+        context.startActivity(intent)
     }
 }
 

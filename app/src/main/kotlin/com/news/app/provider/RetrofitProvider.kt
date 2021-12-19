@@ -1,4 +1,4 @@
-package com.news.app.base
+package com.news.app.provider
 
 import com.news.app.BuildConfig
 import com.squareup.moshi.Moshi
