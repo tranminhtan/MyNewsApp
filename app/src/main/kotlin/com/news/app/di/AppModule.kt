@@ -3,13 +3,13 @@ package com.news.app.di
 import android.app.Application
 import androidx.room.Room
 import com.news.app.BuildConfig
-import com.news.app.provider.RetrofitProvider
-import com.news.app.provider.SchedulersProvider
-import com.news.app.provider.SchedulersProviderImpl
 import com.news.app.db.NewsDao
 import com.news.app.db.NewsDatabase
 import com.news.app.moshi.NewsJsonAdapterFactory
 import com.news.app.network.NewsService
+import com.news.app.provider.RetrofitProvider
+import com.news.app.provider.SchedulersProvider
+import com.news.app.provider.SchedulersProviderImpl
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

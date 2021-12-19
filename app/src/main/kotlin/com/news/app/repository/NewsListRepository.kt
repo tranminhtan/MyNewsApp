@@ -1,10 +1,10 @@
 package com.news.app.repository
 
-import com.news.app.provider.SchedulersProvider
 import com.news.app.db.NewsDao
 import com.news.app.model.Article
 import com.news.app.model.Status
 import com.news.app.network.NewsService
+import com.news.app.provider.SchedulersProvider
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
