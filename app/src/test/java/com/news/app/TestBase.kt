@@ -9,6 +9,6 @@ abstract class TestBase {
     @Before
     @CallSuper
     open fun setup() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
     }
 }
