@@ -1,5 +1,6 @@
 package com.news.app.ui.list
 
+import android.view.View
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
@@ -23,10 +24,17 @@ class NewsListViewModel @Inject constructor(
     private val _articles = MutableLiveData<List<ArticleItem>>()
     val articles: LiveData<List<ArticleItem>> = _articles
 
+    private val _shimmerVisibility = MutableLiveData(View.VISIBLE)
+    val shimmerVisibility: LiveData<Int> = _shimmerVisibility
+
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun observeTopArticles() {
         observeArticlesInteractor()
-            .subscribe({ _articles.postValue(it) }, { Timber.w(it) })
+            .doOnSubscribe { _shimmerVisibility.postValue(View.VISIBLE) }
+            .subscribe({ article ->
+                _articles.postValue(article)
+                _shimmerVisibility.postValue(View.GONE)
+            }, { Timber.w(it) })
             .let { disposables.add(it) }
     }
 

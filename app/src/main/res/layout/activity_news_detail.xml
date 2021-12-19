@@ -8,13 +8,8 @@
     <data>
 
         <variable
-            name="spaceVisibility"
-            type="Integer"
-            />
-
-        <variable
-            name="item"
-            type="com.news.app.model.ArticleItem"
+            name="vm"
+            type="com.news.app.ui.detail.NewsDetailViewModel"
             />
     </data>
 
@@ -36,7 +31,7 @@
                 android:layout_marginBottom="8dp"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop"
-                app:imageFromUrl="@{item.imageUrl}"
+                app:imageFromUrl="@{vm.article.imageUrl}"
                 app:placeholder="@{@drawable/ic_placeholder}"
                 tools:background="@android:color/black"
                 />
@@ -47,7 +42,7 @@
                 android:layout_gravity="bottom"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:text="@{item.title}"
+                android:text="@{vm.article.title}"
                 android:textColor="@android:color/black"
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -57,7 +52,7 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
-                android:visibility="@{spaceVisibility}"
+                android:visibility="@{vm.contentVisibility}"
                 />
 
             <TextView
@@ -66,7 +61,7 @@
                 android:layout_gravity="bottom"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:text="@{item.description}"
+                android:text="@{vm.article.description}"
                 android:textColor="@android:color/black"
                 android:textSize="15sp"
                 android:textStyle="italic"
@@ -76,7 +71,7 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
-                android:visibility="@{spaceVisibility}"
+                android:visibility="@{vm.contentVisibility}"
                 />
 
             <TextView
@@ -85,7 +80,7 @@
                 android:layout_gravity="bottom"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:text="@{item.content}"
+                android:text="@{vm.article.content}"
                 android:textColor="@android:color/black"
                 android:textSize="15sp"
                 tools:text="Trump, who wanted a TV legal team, is 'distracted' by impeachment trial, source says - CNN"

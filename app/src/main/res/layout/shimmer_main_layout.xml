@@ -1,30 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.facebook.shimmer.ShimmerFrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/shimmerView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    shimmer:duration="800"
-    shimmer:shimmer_auto_start="true"
-    >
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <data>
+
+        <variable
+            name="visibility"
+            type="Integer"
+            />
+    </data>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/shimmerView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:visibility="@{visibility}"
+        shimmer:duration="800"
+        shimmer:shimmer_auto_start="true"
         >
 
-        <include layout="@layout/shimmer_item_layout" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
-        <include layout="@layout/shimmer_item_layout" />
+            <include layout="@layout/shimmer_item_layout" />
 
-        <include layout="@layout/shimmer_item_layout" />
+            <include layout="@layout/shimmer_item_layout" />
 
-        <include layout="@layout/shimmer_item_layout" />
+            <include layout="@layout/shimmer_item_layout" />
 
-        <include layout="@layout/shimmer_item_layout" />
+            <include layout="@layout/shimmer_item_layout" />
 
-    </LinearLayout>
+            <include layout="@layout/shimmer_item_layout" />
 
-</com.facebook.shimmer.ShimmerFrameLayout>
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+</layout>

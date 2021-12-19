@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     >
 
-    <include
-        android:id="@+id/shimmerLayout"
-        layout="@layout/shimmer_main_layout"
-        />
+    <data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/articlesRecyclerView"
+        <variable
+            name="adapter"
+            type="com.news.app.ui.list.NewsListAdapter"
+            />
+
+        <variable
+            name="vm"
+            type="com.news.app.ui.list.NewsListViewModel"
+            />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:context=".ui.list.NewsListActivity"
-        tools:listitem="@layout/item_news_list"
-        />
-</FrameLayout>
+        >
+
+        <include
+            android:id="@+id/shimmerLayout"
+            layout="@layout/shimmer_main_layout"
+            app:visibility="@{vm.shimmerVisibility}"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/articlesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            app:bindAdapter="@{adapter}"
+            app:data="@{vm.articles}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:context=".ui.list.NewsListActivity"
+            tools:listitem="@layout/item_news_list"
+            />
+    </FrameLayout>
+</layout>
